@@ -1,0 +1,17 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  out.width = "100%"
+)
+
+library(knitr)
+```
+
+# Files for plotting maps
+ 
+This repository contains simplified GeoJSON files for plotting maps of Canada.
