@@ -89,7 +89,6 @@ The R code used to generate simplified boundary files are available at
 ## References
 
 \[1\]
-(<https://www.r-graph-gallery.com/168-load-a-shape-file-into-r.html>)  
+<https://www.r-graph-gallery.com/168-load-a-shape-file-into-r.html>  
 \[2\]
-(<https://www.r-graph-gallery.com/325-background-map-from-geojson-format-in-r.html>)
-\[3\]
+<https://www.r-graph-gallery.com/325-background-map-from-geojson-format-in-r.html>
