@@ -44,16 +44,16 @@ geojsonio::geojson_write(province_territory_map_raw_json,
                          file = here::here("exported_files", "province_territory.geojson"))
 
 ## Simplify the map object
-province_territory_map_raw_sim_sp <- rmapshaper::ms_simplify(province_territory_map_raw)
-province_territory_map_raw_sim_json <- rmapshaper::ms_simplify(province_territory_map_raw_json)
+province_territory_map_sim_sp <- rmapshaper::ms_simplify(province_territory_map_raw)
+province_territory_map_sim_json <- rmapshaper::ms_simplify(province_territory_map_raw_json)
 
 
 ## Save the simplified file
-rgdal::writeOGR(obj = province_territory_map_raw_sim_sp, 
+rgdal::writeOGR(obj = province_territory_map_sim_sp, 
                 dsn = here::here("exported_files", "province_territory_simplified_sp"), 
                 layer = "province_territory_simplified_sp", 
                 driver = "ESRI Shapefile")
-geojsonio::geojson_write(province_territory_map_raw_sim_json,
+geojsonio::geojson_write(province_territory_map_sim_json,
                          file = here::here("exported_files", "province_territory_simplified.geojson"))
 
 
