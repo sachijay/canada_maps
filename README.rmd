@@ -41,20 +41,16 @@ library(ggplot2)
 
 ```{r shapefile_plot}
 
-province_territory_map_sim_sp <- rgdal::readOGR(
+province_territory_map_sim_sp <- sf::read_sf(
   dsn = here::here("exported_files", "province_territory_simplified_sp"), 
-  layer = "province_territory_simplified_sp",
-  use_iconv = TRUE
+  layer = "province_territory_simplified_sp"
 )
 
 system.time(
   ggplot(
-    data = province_territory_map_sim_sp,
-    mapping = aes(x = long, y = lat, group = group)
+    data = province_territory_map_sim_sp
   ) + 
-    geom_polygon(
-      colour = "white"
-    ) + 
+    geom_sf() + 
     theme_void()
 )
 
