@@ -41,14 +41,22 @@ library(ggplot2)
 
 ```{r shapefile_plot}
 
-province_territory_map_sim_sp <- rgdal::readOGR(dsn = here::here("exported_files", "province_territory_simplified_sp"), 
-                                                layer = "province_territory_simplified_sp",
-                                                use_iconv = TRUE)
+province_territory_map_sim_sp <- rgdal::readOGR(
+  dsn = here::here("exported_files", "province_territory_simplified_sp"), 
+  layer = "province_territory_simplified_sp",
+  use_iconv = TRUE
+)
 
-ggplot(data = province_territory_map_sim_sp,
-       mapping = aes(x = long, y = lat, group = group)) + 
-  geom_polygon(colour = "white") + 
-  theme_void()
+system.time(
+  ggplot(
+    data = province_territory_map_sim_sp,
+    mapping = aes(x = long, y = lat, group = group)
+  ) + 
+    geom_polygon(
+      colour = "white"
+    ) + 
+    theme_void()
+)
 
 ```
 
@@ -56,13 +64,21 @@ ggplot(data = province_territory_map_sim_sp,
 
 ```{r geojson_plot}
 
-province_territory_map_sim_json <- geojsonio::geojson_read(here::here("exported_files", "province_territory_simplified.geojson"),
-                                                           what = "sp")
+province_territory_map_sim_json <- geojsonio::geojson_read(
+  x = here::here("exported_files", "province_territory_simplified.geojson"),
+  what = "sp"
+)
 
-ggplot(data = province_territory_map_sim_json,
-       mapping = aes(x = long, y = lat, group = group)) + 
-  geom_polygon(colour = "white") + 
+system.time(
+  ggplot(
+  data = province_territory_map_sim_json,
+  mapping = aes(x = long, y = lat, group = group)
+) + 
+  geom_polygon(
+    colour = "white"
+  ) + 
   theme_void()
+)
 
 ```
 
