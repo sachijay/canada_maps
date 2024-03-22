@@ -7,15 +7,17 @@
 
 
 ## Install packages from CRAN ####
-## `rgdal` - To read the shapefiles
+## `sf` - To read the shapefiles
 ## `geojsonio` - GeoJSON object handling
 ## `rmapshaper` - Simplify the shapefile
 ## `here` - To find files
 
-cran_packages <- c("rgdal",
-                   "geojsonio",
-                   "rmapshaper",
-                   "here")
+cran_packages <- c(
+  "sf",
+  "geojsonio",
+  "rmapshaper",
+  "here"
+)
 if (length(missing_pkgs <- setdiff(cran_packages, rownames(installed.packages()))) > 0) {
   message("Installing missing package(s): ", 
           paste(missing_pkgs, collapse = ", "))
@@ -31,11 +33,9 @@ rm(cran_packages, missing_pkgs)
 ## Provinces and territories maps ####
 
 ## Read the original shapefiles
-province_territory_map_raw <- rgdal::readOGR(
+province_territory_map_raw <- sf::read_sf(
   dsn = here::here("statcan_files", "province_territory_map"), 
-  layer = "lpr_000b16a_e",
-  use_iconv = TRUE, 
-  encoding = "CP1250"
+  layer = "lpr_000b16a_e"
 )
 
 ## Convert the `sp` object into a GeoJSON object
@@ -55,7 +55,7 @@ province_territory_map_sim_json <- rmapshaper::ms_simplify(province_territory_ma
 
 
 ## Save the simplified file
-rgdal::writeOGR(
+sf::st_write(
   obj = province_territory_map_sim_sp, 
   dsn = here::here("exported_files", "province_territory_simplified_sp"), 
   layer = "province_territory_simplified_sp", 
