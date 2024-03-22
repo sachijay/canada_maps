@@ -37,6 +37,28 @@ library(ggplot2)
 
 ```
 
+
+### From original shapefiles
+
+```{r original_shapefile_plot}
+
+province_territory_map_original_sp <- sf::read_sf(
+  dsn = here::here("statcan_files", "province_territory_map"), 
+  layer = "lpr_000b16a_e"
+)
+
+system.time(
+  ggplot(
+    data = province_territory_map_original_sp
+  ) + 
+    geom_sf() + 
+    theme_void()
+)
+
+```
+
+
+
 ### From shapefiles
 
 ```{r shapefile_plot}
