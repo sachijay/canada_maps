@@ -34,3 +34,5 @@ vignettes/*.pdf
 
 # Shiny token, see https://shiny.rstudio.com/articles/shinyapps.html
 rsconnect/
+exported_files/forward_sortation_areas.geojson
+statcan_files/forward_sortation_areas_map/lfsa000b21a_e.shp
