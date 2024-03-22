@@ -31,17 +31,23 @@ rm(cran_packages, missing_pkgs)
 ## Provinces and territories maps ####
 
 ## Read the original shapefiles
-province_territory_map_raw <- rgdal::readOGR(dsn = here::here("statcan_files", "province_territory_map"), 
-                                             layer = "lpr_000b16a_e",
-                                             use_iconv = TRUE, 
-                                             encoding = "CP1250")
+province_territory_map_raw <- rgdal::readOGR(
+  dsn = here::here("statcan_files", "province_territory_map"), 
+  layer = "lpr_000b16a_e",
+  use_iconv = TRUE, 
+  encoding = "CP1250"
+)
 
 ## Convert the `sp` object into a GeoJSON object
-province_territory_map_raw_json <- geojsonio::geojson_json(province_territory_map_raw)
+province_territory_map_raw_json <- geojsonio::geojson_json(
+  province_territory_map_raw
+)
 
 ## Save the GeoJSON file
-geojsonio::geojson_write(province_territory_map_raw_json,
-                         file = here::here("exported_files", "province_territory.geojson"))
+geojsonio::geojson_write(
+  province_territory_map_raw_json,
+  file = here::here("exported_files", "province_territory.geojson")
+)
 
 ## Simplify the map object
 province_territory_map_sim_sp <- rmapshaper::ms_simplify(province_territory_map_raw)
@@ -49,12 +55,16 @@ province_territory_map_sim_json <- rmapshaper::ms_simplify(province_territory_ma
 
 
 ## Save the simplified file
-rgdal::writeOGR(obj = province_territory_map_sim_sp, 
-                dsn = here::here("exported_files", "province_territory_simplified_sp"), 
-                layer = "province_territory_simplified_sp", 
-                driver = "ESRI Shapefile")
-geojsonio::geojson_write(province_territory_map_sim_json,
-                         file = here::here("exported_files", "province_territory_simplified.geojson"))
+rgdal::writeOGR(
+  obj = province_territory_map_sim_sp, 
+  dsn = here::here("exported_files", "province_territory_simplified_sp"), 
+  layer = "province_territory_simplified_sp", 
+  driver = "ESRI Shapefile"
+)
+geojsonio::geojson_write(
+  province_territory_map_sim_json,
+  file = here::here("exported_files", "province_territory_simplified.geojson")
+)
 
 
 
