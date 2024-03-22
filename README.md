@@ -57,9 +57,9 @@ system.time(
 <img src="README_files/figure-gfm/original_shapefile_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    2.72    4.75    7.62
+    ##    2.36    3.72    7.73
 
-### From shapefiles
+### From simplified shapefiles
 
 ``` r
 province_territory_map_sim_sp <- sf::read_sf(
@@ -81,9 +81,9 @@ system.time(
 <img src="README_files/figure-gfm/shapefile_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    0.22    0.36    0.62
+    ##    0.16    0.23    0.61
 
-### From GeoJSON files
+### From simplified GeoJSON files
 
 ``` r
 province_territory_map_sim_json <- geojsonio::geojson_read(
@@ -126,7 +126,7 @@ system.time(
 <img src="README_files/figure-gfm/geojson_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    0.13    0.31    0.47
+    ##    0.12    0.05    0.47
 
 ## Additional notes
 
