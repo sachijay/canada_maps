@@ -68,9 +68,47 @@ geojsonio::geojson_write(
 
 
 
+## Census forward sortation areas (FSA) maps ####
+
+## Read the original shapefiles
+fsa_map_raw <- sf::read_sf(
+  dsn = here::here("statcan_files", "forward_sortation_areas_map"), 
+  layer = "lfsa000b21a_e"
+)
+
+## Convert the `sp` object into a GeoJSON object
+fsa_map_raw_json <- geojsonio::geojson_json(
+  fsa_map_raw
+)
+
+## Save the GeoJSON file
+geojsonio::geojson_write(
+  fsa_map_raw_json,
+  file = here::here("exported_files", "forward_sortation_areas.geojson")
+)
 
 
+## Simplify the map object
+fsa_map_sim_sp <- rmapshaper::ms_simplify(
+  fsa_map_raw,
+  sys = TRUE,
+  sys_mem = 32
+)
+fsa_map_sim_json <- rmapshaper::ms_simplify(
+  fsa_map_raw_json,
+  sys = TRUE,
+  sys_mem = 32
+)
 
 
-
-
+## Save the simplified file
+sf::st_write(
+  obj = fsa_map_sim_sp, 
+  dsn = here::here("exported_files", "forward_sortation_areas_simplified_sp"), 
+  layer = "forward_sortation_areas_simplified_sp", 
+  driver = "ESRI Shapefile"
+)
+geojsonio::geojson_write(
+  fsa_map_sim_json,
+  file = here::here("exported_files", "forward_sortation_areas_simplified.geojson")
+)

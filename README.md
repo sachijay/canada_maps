@@ -5,9 +5,17 @@
 
 This repository contains **simplified** GeoJSON and shapefiles for
 plotting maps of Canada. The original shapefiles were obtained from
-[Statistics Canada 2016 Census - Boundary
-files](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
+
+- [Statistics Canada 2016 Census provincial/teritorial - Boundary
+  files](https://www12.statcan.gc.ca/census-recensement/2011/geo/bound-limit/bound-limit-2016-eng.cfm)
+
+- [Statistics Canada 2021 Census forward sortation areas (FSA) -
+  Boundary
+  files](https://www12.statcan.gc.ca/census-recensement/alternative_alternatif.cfm?l=eng&dispext=zip&teng=lfsa000b21a_e.zip&k=%20%20%20158240&loc=//www12.statcan.gc.ca/census-recensement/2021/geo/sip-pis/boundary-limites/files-fichiers/lfsa000b21a_e.zip)
+
 which are saved in the [`statcan_files/`](statcan_files/) directory.
+**Large files are not included in this repository. Download if any files
+are not uploaded.**
 
 The purpose of this repository is to provide simplified map files, as
 the original files can be large and takes time to plot. **The
@@ -19,11 +27,14 @@ especially along small geographies**.
 The converted files are available in the
 [`exported_files`](exported_files/) directory as  
 - GeoJSON files obtained from directly converting shapefiles
-([`province_territory.geojson`](exported_files/province_territory.geojson)),  
+([`province_territory.geojson`](exported_files/province_territory.geojson),
+[`forward_sortation_areas.geojson`](exported_files/forward_sortation_areas.geojson)),  
 - GeoJSON files of the simplified boundaries
-([`province_territory_simplified.geojson`](exported_files/province_territory_simplified.geojson)),  
+([`province_territory_simplified.geojson`](exported_files/province_territory_simplified.geojson),
+[`forward_sortation_areas_simplified.geojson`](exported_files/forward_sortation_areas_simplified.geojson)),  
 - shapefiles of the simplified boundaries
-([`province_territory_simplified_sp`](exported_files/province_territory_simplified_sp/)).
+([`province_territory_simplified_sp`](exported_files/province_territory_simplified_sp/),
+[`forward_sortation_areas_simplified_sp`](exported_files/forward_sortation_areas_simplified_sp/)).
 
 ## Example: How to plot in `R`
 
@@ -57,7 +68,7 @@ system.time(
 <img src="README_files/figure-gfm/original_shapefile_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    2.36    3.72    7.73
+    ##    2.21    4.14    7.78
 
 ### From simplified shapefiles
 
@@ -81,7 +92,7 @@ system.time(
 <img src="README_files/figure-gfm/shapefile_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    0.16    0.23    0.61
+    ##    0.20    0.30    0.63
 
 ### From simplified GeoJSON files
 
@@ -126,7 +137,7 @@ system.time(
 <img src="README_files/figure-gfm/geojson_plot-1.png" width="100%" />
 
     ##    user  system elapsed 
-    ##    0.12    0.05    0.47
+    ##    0.06    0.28    0.46
 
 ## Additional notes
 
