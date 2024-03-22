@@ -35,35 +35,61 @@ functions.
 library(ggplot2)
 ```
 
+### From original shapefiles
+
+``` r
+province_territory_map_original_sp <- sf::read_sf(
+  dsn = here::here("statcan_files", "province_territory_map"), 
+  layer = "lpr_000b16a_e"
+)
+
+p_original <- ggplot(
+  data = province_territory_map_original_sp
+) + 
+  geom_sf() + 
+  theme_void()
+
+system.time(
+  plot(p_original)  
+)
+```
+
+<img src="README_files/figure-gfm/original_shapefile_plot-1.png" width="100%" />
+
+    ##    user  system elapsed 
+    ##    2.72    4.75    7.62
+
 ### From shapefiles
 
 ``` r
-province_territory_map_sim_sp <- rgdal::readOGR(dsn = here::here("exported_files", "province_territory_simplified_sp"), 
-                                                layer = "province_territory_simplified_sp",
-                                                use_iconv = TRUE)
-```
+province_territory_map_sim_sp <- sf::read_sf(
+  dsn = here::here("exported_files", "province_territory_simplified_sp"), 
+  layer = "province_territory_simplified_sp"
+)
 
-    ## OGR data source with driver: ESRI Shapefile 
-    ## Source: "Z:\documents\github\canada_maps\exported_files\province_territory_simplified_sp", layer: "province_territory_simplified_sp"
-    ## with 13 features
-    ## It has 6 fields
-
-``` r
-ggplot(data = province_territory_map_sim_sp,
-       mapping = aes(x = long, y = lat, group = group)) + 
-  geom_polygon(colour = "white") + 
+p_sim_sp <- ggplot(
+  data = province_territory_map_sim_sp
+) + 
+  geom_sf() + 
   theme_void()
-```
 
-    ## Regions defined for each Polygons
+system.time(
+  plot(p_sim_sp)
+)
+```
 
 <img src="README_files/figure-gfm/shapefile_plot-1.png" width="100%" />
+
+    ##    user  system elapsed 
+    ##    0.22    0.36    0.62
 
 ### From GeoJSON files
 
 ``` r
-province_territory_map_sim_json <- geojsonio::geojson_read(here::here("exported_files", "province_territory_simplified.geojson"),
-                                                           what = "sp")
+province_territory_map_sim_json <- geojsonio::geojson_read(
+  x = here::here("exported_files", "province_territory_simplified.geojson"),
+  what = "sp"
+)
 ```
 
     ## Registered S3 method overwritten by 'geojsonsf':
@@ -71,15 +97,36 @@ province_territory_map_sim_json <- geojsonio::geojson_read(here::here("exported_
     ##   print.geojson geojson
 
 ``` r
-ggplot(data = province_territory_map_sim_json,
-       mapping = aes(x = long, y = lat, group = group)) + 
-  geom_polygon(colour = "white") + 
+p_sim_json <- ggplot(
+  data = province_territory_map_sim_json,
+  mapping = aes(x = long, y = lat, group = group)
+) + 
+  geom_polygon(
+    colour = "white"
+  ) + 
   theme_void()
 ```
 
+    ## Warning: `fortify(<SpatialPolygonsDataFrame>)` was deprecated in ggplot2 3.4.4.
+    ## ℹ Please migrate to sf.
+    ## ℹ The deprecated feature was likely used in the ggplot2 package.
+    ##   Please report the issue at <https://github.com/tidyverse/ggplot2/issues>.
+    ## This warning is displayed once every 8 hours.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
     ## Regions defined for each Polygons
 
+``` r
+system.time(
+  plot(p_sim_json)
+)
+```
+
 <img src="README_files/figure-gfm/geojson_plot-1.png" width="100%" />
+
+    ##    user  system elapsed 
+    ##    0.13    0.31    0.47
 
 ## Additional notes
 

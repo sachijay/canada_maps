@@ -47,19 +47,21 @@ province_territory_map_original_sp <- sf::read_sf(
   layer = "lpr_000b16a_e"
 )
 
+p_original <- ggplot(
+  data = province_territory_map_original_sp
+) + 
+  geom_sf() + 
+  theme_void()
+
 system.time(
-  ggplot(
-    data = province_territory_map_original_sp
-  ) + 
-    geom_sf() + 
-    theme_void()
+  plot(p_original)  
 )
 
 ```
 
 
 
-### From shapefiles
+### From simplified shapefiles
 
 ```{r shapefile_plot}
 
@@ -68,17 +70,19 @@ province_territory_map_sim_sp <- sf::read_sf(
   layer = "province_territory_simplified_sp"
 )
 
+p_sim_sp <- ggplot(
+  data = province_territory_map_sim_sp
+) + 
+  geom_sf() + 
+  theme_void()
+
 system.time(
-  ggplot(
-    data = province_territory_map_sim_sp
-  ) + 
-    geom_sf() + 
-    theme_void()
+  plot(p_sim_sp)
 )
 
 ```
 
-### From GeoJSON files
+### From simplified GeoJSON files
 
 ```{r geojson_plot}
 
@@ -87,8 +91,7 @@ province_territory_map_sim_json <- geojsonio::geojson_read(
   what = "sp"
 )
 
-system.time(
-  ggplot(
+p_sim_json <- ggplot(
   data = province_territory_map_sim_json,
   mapping = aes(x = long, y = lat, group = group)
 ) + 
@@ -96,6 +99,9 @@ system.time(
     colour = "white"
   ) + 
   theme_void()
+
+system.time(
+  plot(p_sim_json)
 )
 
 ```
